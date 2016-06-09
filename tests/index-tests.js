@@ -1,0 +1,94 @@
+var lib = require('../lib');
+
+var jwt = require('jsonwebtoken');
+var uuid = require('uuid');
+var SECRET = new Buffer('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'base64');
+
+var should = require('chai').should();
+
+describe('express-jwt-fhir', function () {
+    var auth = lib({
+        jwt: {
+            requireCredentials: true,
+            secret: SECRET,
+            audience: 'https://fhir.example.net',
+            issuer: 'https://auth.example.net'
+        },
+        fhir: {
+            base: 'https://fhir.example.net/fhir'
+        }
+    });
+
+    var options = {
+        expiresIn: 3600,
+        notBefore: 0,
+        issuer: 'https://auth.example.net'
+    };
+
+    var res;
+    var req;
+    var payload;
+
+    beforeEach(function () {
+        payload = {
+            sub: 'user@example.net',
+            aud: [
+                'https://fhir.example.net',
+                'https://fhir.example2.net'
+            ],
+            fhir_scp: ['*'],
+            fhir_act: ['read:Foo'],
+            jti: uuid.v4()
+        };
+
+        req = {
+            headers: {
+                'authorization': 'Bearer ' + jwt.sign(payload, SECRET, options)
+            },
+            url: 'https://fhir.example.net/fhir/Foo/123',
+            method: 'GET'
+        };
+
+        res = {
+            status: 0,
+            headers: {},
+            set: function (key, value) {
+                this.headers[key] = value;
+            },
+            sendStatus: function (status) {
+                this.status = status;
+            }
+        };
+    });
+
+    it('should be implemented as a function', function () {
+        should.exist(auth);
+        auth.should.be.a('function');
+    });
+
+    it('should call next()', function (done) {
+        auth(req, res, function (err) {
+            should.not.exist(err);
+
+            done();
+        });
+    });
+
+    it('should populate req.user', function (done) {
+        auth(req, res, function (err) {
+            should.not.exist(err);
+
+            req.user.should.equal(payload.sub);
+
+            done();
+        });
+    });
+
+    it('should return 403 when action not authorised', function (done) {
+        req.url = 'https://fhir.example.net/fhir/Bar/123';
+        auth(req, res, function (err) {
+            err.status.should.equal(403);
+            done();
+        });
+    });
+});

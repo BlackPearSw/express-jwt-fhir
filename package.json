@@ -1,0 +1,26 @@
+{
+  "name": "jwt-claims-fhir-connect",
+  "version": "0.0.1",
+  "description": "Connect middleware to authorise",
+  "publishConfig": {
+    "registry": "https://npm.blackpear.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BlackPearSw/jwt-claims-fhir-connect.git"
+  },
+  "main": "./lib/index.js",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "uuid": "^2.0.2"
+  },
+  "scripts": {
+    "test": "mocha --recursive ./tests"
+  },
+  "dependencies": {
+    "express-jwt": "^3.4.0",
+    "jsonwebtoken": "^7.0.0",
+    "jwt-claims-fhir": "0.0.5"
+  }
+}

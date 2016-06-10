@@ -1,13 +1,13 @@
 {
-  "name": "jwt-claims-fhir-connect",
-  "version": "0.0.1",
-  "description": "Connect middleware to authorise",
+  "name": "express-jwt-fhir",
+  "version": "0.0.2",
+  "description": "Connect middleware for fhir ",
   "publishConfig": {
     "registry": "https://npm.blackpear.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlackPearSw/jwt-claims-fhir-connect.git"
+    "url": "https://github.com/BlackPearSw/express-jwt-fhir.git"
   },
   "main": "./lib/index.js",
   "devDependencies": {

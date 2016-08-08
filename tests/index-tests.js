@@ -15,7 +15,7 @@ describe('express-jwt-fhir', function () {
             issuer: 'https://auth.example.net'
         },
         fhir: {
-            base: 'https://fhir.example.net/fhir'
+            base: 'https://fhir.example.net/svc/fhir'
         }
     });
 
@@ -43,9 +43,11 @@ describe('express-jwt-fhir', function () {
 
         req = {
             headers: {
-                'authorization': 'Bearer ' + jwt.sign(payload, SECRET, options)
+                'authorization': 'Bearer ' + jwt.sign(payload, SECRET, options),
+                'host': 'fhir.example.net'
             },
-            url: 'https://fhir.example.net/fhir/Foo/123',
+            originalUrl: '/svc/fhir/Foo/123',
+            protocol: 'https',
             method: 'GET'
         };
 
@@ -85,7 +87,7 @@ describe('express-jwt-fhir', function () {
     });
 
     it('should return 403 when action not authorised', function (done) {
-        req.url = 'https://fhir.example.net/fhir/Bar/123';
+        req.originalUrl = '/svc/fhir/Bar/123';
         auth(req, res, function (err) {
             err.status.should.equal(403);
             done();

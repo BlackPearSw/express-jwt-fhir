@@ -21,6 +21,6 @@
   "dependencies": {
     "express-jwt": "^3.4.0",
     "jsonwebtoken": "^7.0.0",
-    "jwt-claims-fhir": "0.0.5"
+    "jwt-claims-fhir": "0.0.6"
   }
 }

@@ -1,9 +1,9 @@
 # express-jwt-fhir
-Extends express-jwt to check [jwt claims for fhir](https://github.com/BlackPearSw/jwt-claims-fhir/blob/master/jwt-claims-fhir.md)
+Connect middleware, extending express-jwt to check [jwt claims for fhir](https://github.com/BlackPearSw/jwt-claims-fhir/blob/master/jwt-claims-fhir.md)
 
-request is decorated with:
-user - token.sub
-auth - token
+Request is decorated with:
+- user - token.sub
+- auth - token
 
 ## Notices
 

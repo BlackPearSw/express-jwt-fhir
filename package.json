@@ -1,6 +1,6 @@
 {
   "name": "express-jwt-fhir",
-  "version": "0.0.6",
+  "version": "0.0.5",
   "description": "Connect middleware for fhir ",
   "publishConfig": {
     "registry": "https://npm.blackpear.com"

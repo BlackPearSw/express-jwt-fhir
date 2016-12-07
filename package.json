@@ -12,6 +12,7 @@
   "main": "./lib/index.js",
   "devDependencies": {
     "chai": "^3.5.0",
+    "jsonwebtoken": "7.1.9",
     "mocha": "^2.4.5",
     "uuid": "^2.0.2"
   },
@@ -20,7 +21,6 @@
   },
   "dependencies": {
     "express-jwt": "^3.4.0",
-    "jsonwebtoken": "^7.0.0",
     "jwt-claims-fhir": "0.0.9"
   }
 }

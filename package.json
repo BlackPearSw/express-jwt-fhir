@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "express-jwt": "^3.4.0",
-    "jwt-claims-fhir": "0.0.9"
+    "jwt-claims-fhir": "0.0.10"
   }
 }

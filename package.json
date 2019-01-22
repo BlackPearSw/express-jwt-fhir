@@ -1,26 +1,24 @@
 {
-  "name": "express-jwt-fhir",
+  "name": "@blackpear/express-jwt-fhir",
   "version": "0.0.10",
   "description": "Connect middleware for HL7 FHIR",
-  "publishConfig": {
-    "registry": "https://npm.blackpear.com"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/BlackPearSw/express-jwt-fhir.git"
   },
   "main": "./lib/index.js",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "jsonwebtoken": "7.1.9",
-    "mocha": "^2.4.5",
-    "uuid": "^2.0.2"
+    "chai": "^4.2.0",
+    "jsonwebtoken": "^8.1.0",
+    "mocha": "^5.2.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "test": "mocha --recursive ./tests"
   },
   "dependencies": {
-    "express-jwt": "^3.4.0",
-    "jwt-claims-fhir": "0.0.13"
-  }
+    "express-jwt": "^5.3.0",
+    "@blackpear/jwt-claims-fhir": "^0.0.15"
+  },
+  "license": "MIT"
 }

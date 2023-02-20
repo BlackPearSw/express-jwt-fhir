@@ -3,6 +3,7 @@ const lib = require('../lib');
 const jose = require('jose');
 const uuid = require('uuid');
 const crypto = require('crypto');
+const should = require('chai').should();
 
 const PRIVATE_KEY = "-----BEGIN RSA PRIVATE KEY-----\n" +
     "MIIEoQIBAAKCAQB1aecZSlltGWqpo2osMcto1ZPHscQvR+nWxT8geAeaXX6mjD4w\n" +
@@ -44,11 +45,9 @@ const PUBLIC_KEY = "-----BEGIN PUBLIC KEY-----\n" +
 
 const SECRET = Buffer.from(PUBLIC_KEY);
 
-var should = require('chai').should();
-
-describe('express-jwt-fhir', function () {
-    describe('with fixed fhir base url', function () {
-        var auth = lib({
+describe('express-jwt-fhir', () => {
+    describe('with fixed fhir base url', () => {
+        const auth = lib({
             jwt: {
                 requireCredentials: true,
                 secret: SECRET,
@@ -60,9 +59,9 @@ describe('express-jwt-fhir', function () {
             }
         });
 
-        var res;
-        var req;
-        var expected = {
+        let res;
+        let req;
+        const expected = {
             sub: 'user@example.net',
             aud: [
                 'https://fhir.example.net',
@@ -72,7 +71,7 @@ describe('express-jwt-fhir', function () {
             fhir_act: ['read:Foo']
         };
 
-        beforeEach(async function () {
+        beforeEach(async  () => {
             const jwk = crypto.createPrivateKey(PRIVATE_KEY);
             const claims = {
                 fhir_scp: expected.fhir_scp,
@@ -110,12 +109,12 @@ describe('express-jwt-fhir', function () {
             };
         });
 
-        it('should be implemented as a function', function () {
+        it('should be implemented as a function', () =>  {
             should.exist(auth);
             auth.should.be.a('function');
         });
 
-        it('should call next()', function (done) {
+        it('should call next()', (done) =>  {
             auth(req, res, function (err) {
                 should.not.exist(err);
 
@@ -123,7 +122,7 @@ describe('express-jwt-fhir', function () {
             });
         });
 
-        it('should populate req.user', function (done) {
+        it('should populate req.user', (done) =>  {
             auth(req, res, function (err) {
                 should.not.exist(err);
 
@@ -133,7 +132,7 @@ describe('express-jwt-fhir', function () {
             });
         });
 
-        it('should return 403 when action not authorised', function (done) {
+        it('should return 403 when action not authorised',  (done) => {
             req.originalUrl = '/svc/fhir/Bar/123';
             auth(req, res, function (err) {
                 err.status.should.equal(403);
@@ -142,8 +141,8 @@ describe('express-jwt-fhir', function () {
         });
     });
 
-    describe('with regex fhir base url', function () {
-        var auth = lib({
+    describe('with regex fhir base url', () => {
+        const auth = lib({
             jwt: {
                 requireCredentials: true,
                 secret: SECRET,
@@ -157,9 +156,9 @@ describe('express-jwt-fhir', function () {
             }
         });
 
-        var res;
-        var req;
-        var expected = {
+        let res;
+        let req;
+        const expected = {
             sub: 'user@example.net',
             aud: [
                 'https://fhir.example.net/svc/Z99999'
@@ -168,7 +167,7 @@ describe('express-jwt-fhir', function () {
             fhir_act: ['read:Foo']
         }
 
-        beforeEach(async function () {
+        beforeEach(async () => {
 
             const jwk = crypto.createPrivateKey(PRIVATE_KEY);
             const claims = {
@@ -207,12 +206,12 @@ describe('express-jwt-fhir', function () {
             };
         });
 
-        it('should be implemented as a function', function () {
+        it('should be implemented as a function', () => {
             should.exist(auth);
             auth.should.be.a('function');
         });
 
-        it('should call next()', function (done) {
+        it('should call next()', (done) => {
             auth(req, res, function (err) {
                 should.not.exist(err);
 
@@ -220,7 +219,7 @@ describe('express-jwt-fhir', function () {
             });
         });
 
-        it('should populate req.user', function (done) {
+        it('should populate req.user', (done) => {
             auth(req, res, function (err) {
                 should.not.exist(err);
 
@@ -230,7 +229,7 @@ describe('express-jwt-fhir', function () {
             });
         });
 
-        it('should return 403 when action not authorised', function (done) {
+        it('should return 403 when action not authorised', (done) => {
             req.originalUrl = '/svc/Z99999/fhir/Bar/123';
             auth(req, res, function (err) {
                 err.status.should.equal(403);

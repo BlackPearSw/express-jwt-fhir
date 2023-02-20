@@ -1,6 +1,6 @@
 {
   "name": "@blackpear/express-jwt-fhir",
-  "version": "0.0.11",
+  "version": "1.0.0",
   "description": "Connect middleware for HL7 FHIR",
   "repository": {
     "type": "git",
@@ -9,16 +9,16 @@
   "main": "./lib/index.js",
   "devDependencies": {
     "chai": "^4.2.0",
-    "jsonwebtoken": "^8.1.0",
-    "mocha": "^5.2.0",
+    "jose": "^4.12.0",
+    "mocha": "^10.2.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
     "test": "mocha --recursive ./tests"
   },
   "dependencies": {
-    "express-jwt": "^5.3.0",
-    "@blackpear/jwt-claims-fhir": "^0.0.15"
+    "@blackpear/jwt-claims-fhir": "^0.0.15",
+    "express-jwt": "^8.4.1"
   },
   "license": "MIT"
 }

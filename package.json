@@ -1,6 +1,6 @@
 {
   "name": "@blackpear/express-jwt-fhir",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Connect middleware for HL7 FHIR",
   "repository": {
     "type": "git",
